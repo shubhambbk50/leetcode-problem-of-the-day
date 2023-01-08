@@ -1,0 +1,56 @@
+149. Max Points on a Line
+Hard
+2.7K
+346
+Companies
+Given an array of points where points[i] = [xi, yi] represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.
+
+ 
+
+Example 1:
+
+
+Input: points = [[1,1],[2,2],[3,3]]
+Output: 3
+Example 2:
+
+
+Input: points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
+Output: 4
+ 
+
+Constraints:
+
+1 <= points.length <= 300
+points[i].length == 2
+-104 <= xi, yi <= 104
+All the points are unique.
+Accepted
+291.7K
+Submissions
+1.3M
+Acceptance Rate
+23.3%
+
+CODE-:
+
+class Solution {
+public:
+    int maxPoints(vector<vector<int>>& points) {
+        int mx=1;
+        int n=points.size();
+        for(int i=0; i<n; i++){
+            map<double,int>mp;
+            for(int j=0; j<n; j++){
+                if(i==j) continue;
+                float curr= (1.0*(points[j][1]-points[i][1]))/(points[j][0]-points[i][0]);
+                mp[curr]++;
+            }
+            int cnt=0;
+            for(auto k:mp){
+                mx=max(mx,k.second+1);
+            }
+        }
+        return mx;
+    }
+};
